@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastrar Usuário</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body class="center-page">
+
+    <div class="card">
+        <h2>Novo Usuário</h2>
+        
+        <div id="success-message" class="alert-success" style="display: none;">
+            </div>
+
+        <form id="cadastro-form"> 
+            <label>Nome</label>
+            <input type="text" id="nome-input" placeholder="Digite o nome do usuário" required>
+
+            <label>Email</label>
+            <input type="email" id="email-input" placeholder="Digite o email" required>
+
+            <label>Senha</label>
+            <input type="password" id="senha-input" placeholder="Crie uma senha" required>
+
+            <button type="submit" id="btn-cadastrar" class="btn">Cadastrar</button>
+        </form>
+
+        <a href="index.html" class="link-voltar">Voltar para o Login</a>
+    </div>
+
+
+<script>
+    // Seleciona o formulário
+    const cadastroForm = document.getElementById('cadastro-form');
+    // Seleciona o campo de nome
+    const nomeInput = document.getElementById('nome-input');
+    // Seleciona a caixa de mensagem de sucesso
+    const successMessage = document.getElementById('success-message');
+    
+    // Adiciona um "ouvinte" ao formulário para reagir ao evento de envio
+    cadastroForm.addEventListener('submit', function(event) {
+        // Impede que a página recarregue ao clicar em submit (padrão do formulário)
+        event.preventDefault(); 
+
+        // Se a validação HTML  falhar, este bloco não é executado.
+        
+        // Captura o nome digitado
+        const nomeUsuario = nomeInput.value.trim();
+        
+        // Verifica se o campo Nome foi realmente preenchido (redundância)
+        if (!nomeUsuario) {
+            return; 
+        }
+
+        // Configura a mensagem com o nome capturado
+        successMessage.innerHTML = `✅ Usuário <strong>${nomeUsuario}</strong> cadastrado com sucesso!`;
+
+        // Esconde o formulário e exibe a mensagem de sucesso
+        cadastroForm.style.display = 'none';
+        successMessage.style.display = 'block';
+
+        // Limpa os dados de todos os campos
+        document.getElementById('nome-input').value = '';
+        document.getElementById('email-input').value = '';
+        document.getElementById('senha-input').value = '';
+        
+        // Redireciona após 3 segundos para a tela de login
+        setTimeout(function() {
+            window.location.href = 'index.html'; 
+        }, 3000); // 3000 milissegundos = 3 segundos
+    });
+</script>
+
+    </body>
+</html>

@@ -1,0 +1,559 @@
+/* =========================================================
+   1. RESET + CONFIGURAÇÃO GLOBAL
+   ========================================================= */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Definição de Cores Globais (Padrão Facebook/Clean) */
+:root {
+    --primary-color: #2e18f2; 
+    --secondary-color: #f0f2f5; 
+    --text-color: #333;
+    --border-color: #ddd;
+}
+
+body {
+    background: var(--secondary-color);
+    color: var(--text-color);
+}
+
+/* =========================================================
+   2. PÁGINAS CENTRAIS (Login, Reunião, Aula, Eventos)
+   ========================================================= */
+.center-page,
+.login-page,
+.agendamento-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+/* Alinha o conteúdo ao topo para telas com cabeçalho (agendamento.html) */
+.agendamento-page {
+    align-items: flex-start;
+    flex-direction: column; /* Necessário para que o header ocupe a largura total */
+}
+
+/* =========================================================
+   3. CARD PADRÃO (Usado em Reunião, Aula, Eventos, Cadastro)
+   ========================================================= */
+.card {
+    background: white;
+    padding: 100px;
+    border-radius: 12px;
+    width: 100%;
+    max-width: 660px;
+    box-shadow: 0px 4px 12px rgba(0,0,0,0.1);
+    text-align: center;
+}
+
+.card h2 {
+    margin-bottom: 15px;
+}
+
+.card p {
+    margin-bottom: 25px;
+    color: #555;
+}
+
+/* =========================================================
+   4. LOGIN CONTAINER
+   ========================================================= */
+.login-container {
+    background: white;
+    padding: 40px;
+    border-radius: 12px;
+    width: 100%;
+    max-width: 380px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.login-container h1 {
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.login-form label {
+    font-weight: bold;
+    margin-bottom: 5px;
+    display: block;
+}
+
+.login-form input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    margin-bottom: 15px;
+    font-size: 15px;
+}
+
+/* =========================================================
+   5. BOTÕES PADRÃO (O 'btn' CORRIGIDO)
+   ========================================================= */
+.btn {
+    /* CORRIGIDO: Garante visibilidade e cor primária */
+    display: block;
+    width: 100%;
+    padding: 12px;
+    background: var(--primary-color);
+    color: white;
+    text-decoration: none;
+    border-radius: 6px;
+    margin: 10px 0;
+    text-align: center;
+    transition: 0.3s;
+    border: none;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.btn:hover {
+    background: #2e18f2; /* Tom de hover */
+}
+
+/* Link de "voltar" (link-voltar) */
+.link-voltar {
+    display: block;
+    text-align: center;
+    margin-top: 10px;
+    color: var(--primary-color);
+    text-decoration: none;
+}
+
+.link-voltar:hover {
+    text-decoration: underline;
+}
+
+/* =========================================================
+   6. DASHBOARD – CARDS DE OPÇÃO
+   ========================================================= */
+.card-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-top: 25px;
+    justify-content: center;
+}
+
+/* Aumentando a dimensão dos cards para parecerem menos "curtos" */
+.option-card {
+    display: flex; 
+    flex-direction: column; 
+    justify-content: flex-start;
+    
+    /* 🔑 MUDANÇA PRINCIPAL AQUI: Reduzindo a altura para 140px */
+    height: 140px; 
+    width: 180px;
+    
+    padding: 15px; 
+    border-radius: 10px;
+    text-decoration: none;
+    color: var(--text-color);
+    background: white;
+    box-shadow: 0px 4px 10px rgba(0,0,0,0.08);
+    transition: 0.2s;
+    text-align: center; 
+}
+
+.option-card:hover {
+    transform: translateY(-4px); 
+    background: #f8f8f8; 
+    box-shadow: 0px 6px 15px rgba(0,0,0,0.15); 
+}
+/* Mantenha os estilos internos (h3, p) como estavam */
+
+.option-card h3 {
+    /* 🔑 REMOVEMOS A MARGEM INFERIOR do título para aproximar a descrição */
+    color: var(--primary-color);
+    margin-bottom: 0px; 
+    font-size: 1.1rem;
+}
+
+.option-card p {
+    font-size: 0.9rem;
+    color: #555;
+    /* 🔑 ADICIONAMOS UMA MARGEM SUPERIOR PEQUENA na descrição */
+    margin-top: 5px; 
+    margin-bottom: 0;
+}
+
+/* =========================================================
+   7. ESTILOS DE AGENDAMENTO E HEADER (UNIFICADO)
+   ========================================================= */
+
+/* Onde o formulário de agendamento se posiciona */
+.main-content {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding: 0 20px;
+}
+
+/* Header principal (topbar) */
+.topbar {
+    /* CORRIGIDO: Esta é a única definição de .topbar, contendo position:relative */
+    width: 100%;
+    background: var(--primary-color);
+    color: white;
+    padding: 20px 0;
+    text-align: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    margin-bottom: 40px;
+    position: relative; /* ESSENCIAL para o botão Voltar */
+    flex-shrink: 0;
+}
+
+.topbar h2 {
+    margin: 0;
+    font-size: 1.6rem;
+    font-weight: 500;
+}
+
+/* Botão Voltar no Header */
+.btn-voltar {
+    position: absolute;
+    left: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+    text-decoration: none;
+    padding: 8px 15px;
+    border-radius: 6px;
+    font-size: 1rem;
+    transition: background 0.2s;
+    z-index: 10;
+}
+
+.btn-voltar:hover {
+    background: rgba(255, 255, 255, 0.3);
+}
+
+/* Estilos do Formulário de Agendamento (card) */
+.agendamento-form {
+    background: white;
+    width: 100%;
+    max-width: 420px;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.12);
+    margin-bottom: 40px;
+}
+
+.agendamento-form label {
+    font-weight: 600;
+    display: block;
+    margin-bottom: 8px;
+    color: var(--text-color);
+}
+
+.agendamento-form label i {
+    margin-right: 8px;
+    color: var(--primary-color);
+}
+
+.agendamento-form input,
+.agendamento-form select {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    margin-bottom: 20px;
+    font-size: 1rem;
+    box-sizing: border-box;
+}
+
+.agendamento-form input:focus,
+.agendamento-form select:focus {
+    border-color: var(--primary-color);
+    outline: none;
+    box-shadow: 0 0 0 1px var(--primary-color);
+}
+
+/* Layout Horário Início/Fim */
+.horario-group {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 5px;
+}
+
+.horario-input {
+    flex: 1;
+}
+
+.horario-input input {
+    margin-bottom: 0;
+}
+
+/* Botão de Confirmação no Formulário */
+.btn-confirmar {
+    background: var(--primary-color);
+    color: white;
+    border: none;
+    width: 100%;
+    padding: 15px;
+    border-radius: 6px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 25px;
+    transition: background 0.2s, transform 0.1s;
+}
+
+.btn-confirmar:hover {
+    background: #2e18f2;
+}
+.btn-confirmar:active {
+    transform: translateY(1px);
+}
+
+/* =========================================================
+   8. ESTILOS DE INPUT GENÉRICOS (Cadastro)
+   ========================================================= */
+.card input {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 12px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    font-size: 15px;
+}
+
+
+/* =========================================================
+   9. ALERTA DE SUCESSO
+   ========================================================= */
+.alert-success {
+    background-color: #4bd84f;
+    color: white;
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    text-align: center;
+    border: 2px solid #4fc755; /* Borda mais escura */
+}
+
+/* =========================================================
+   10. DASHBOARD - LAYOUT OTIMIZADO
+   ========================================================= */
+/* Novo layout para o body do dashboard para permitir o header fixo */
+.dash-page-layout {
+    display: block; /* Remove o display: flex da .center-page */
+    background: var(--secondary-color);
+    min-height: 100vh;
+    padding: 20px;
+}
+
+/* Header que contém o botão de Sair e o Título */
+.dashboard-header-top {
+    text-align: center;
+    padding: 0 20px;
+    position: relative;
+    /* Centraliza o cabeçalho no mesmo container lógico dos cards */
+    max-width: 660px; /* Usando o max-width do .card */
+    margin: 40px auto 10px auto;
+}
+
+/* Estilo para o botão Sair/Voltar no Topo (superior esquerdo) */
+.btn-voltar-topo {
+    position: absolute;
+    left: 0; /* Alinha à esquerda do container */
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--primary-color);
+    text-decoration: none;
+    padding: 8px 15px;
+    border-radius: 6px;
+    font-size: 1rem;
+    font-weight: bold;
+    transition: background 0.2s;
+}
+
+.btn-voltar-topo:hover {
+    background: #eaf3ff;
+}
+
+/* Container de Cards e Botão Principal (o novo .card) */
+.card-dashboard-options {
+    /* Estilos do .card original, mas com padding e box-shadow zeroed */
+    background: white;
+    padding: 35px; /* Mantém o padding interno */
+    border-radius: 12px;
+    width: 100%;
+    max-width: 660px; /* Usando o max-width do .card */
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+    text-align: center;
+
+    margin: 0 auto; /* Centraliza o bloco de cards */
+}
+
+/* Ajuste no novo botão principal "Ver Meus Agendamentos" */
+.btn-dashboard-principal {
+    margin-top: 35px; /* Mais espaço acima do botão */
+    margin-bottom: 0;
+    /* 🔑 Diminuir e Centralizar o botão: define uma largura menor e usa auto margin */
+    max-width: 300px; 
+    margin-left: auto; 
+    margin-right: auto;
+}
+
+
+/* =========================================================
+   11. RESPONSIVIDADE
+   ========================================================= */
+@media (max-width: 600px) {
+
+    .card,
+    .login-container,
+    .agendamento-form,
+    .card-dashboard-options {
+        padding: 25px;
+        max-width: 100%; /* Garante que o card ocupe a tela toda */
+    }
+
+    /* Cards de opção empilhados */
+    .option-card {
+        width: 100%;
+        height: auto;
+    }
+
+    .topbar h2 {
+        font-size: 1.2rem;
+    }
+
+    .btn-voltar {
+        font-size: 0.9rem;
+        padding: 6px 12px;
+        left: 10px;
+    }
+    
+    .btn-voltar-topo {
+        left: 10px;
+    }
+    
+    .dashboard-header-top {
+        max-width: 100%;
+        margin-top: 20px;
+    }
+
+    /* Horário de agendamento em coluna no mobile */
+    .horario-group {
+        flex-direction: column;
+        gap: 0;
+    }
+    
+    /* Botão principal fica full width no mobile */
+    .btn-dashboard-principal {
+        max-width: 100%; 
+    }
+}
+
+/* =========================================================
+   12. ESTILOS DA LISTA DE AGENDAMENTOS
+   ========================================================= */
+
+.card-lista-agendamentos {
+    /* Ajusta o padding para listas (menos excessivo que o card padrão) */
+    padding: 30px;
+    max-width: 660px; 
+    text-align: left;
+    margin: 40px auto;
+}
+
+.instrucao-lista {
+    font-size: 1rem;
+    color: #555;
+    margin-bottom: 25px;
+    font-weight: bold;
+}
+
+.agendamento-item {
+    background: #f8f8f8;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 15px;
+    margin-bottom: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap; /* Permite quebrar em telas menores */
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.item-info {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px; /* Espaço para telas menores */
+}
+
+.item-titulo {
+    font-weight: bold;
+    color: var(--text-color);
+    font-size: 1.1rem;
+}
+
+.item-local {
+    font-size: 0.9rem;
+    color: var(--primary-color);
+    margin-top: 5px;
+}
+
+.item-detalhes {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    font-size: 0.9rem;
+    color: #777;
+    flex-grow: 1; /* Permite ocupar espaço extra */
+    justify-content: flex-end; /* Alinha os detalhes à direita */
+}
+
+.item-detalhes i {
+    margin-right: 5px;
+}
+
+.btn-acao-secundaria {
+    background: #e9e9e9;
+    color: #888;
+    border: none;
+    padding: 6px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.85rem;
+    transition: background 0.2s;
+}
+
+.btn-acao-secundaria:hover {
+    background: #ddd;
+    color: #c0392b;
+}
+
+/* Responsividade para a lista em telas pequenas */
+@media (max-width: 600px) {
+    .agendamento-item {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .item-detalhes {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+        margin-top: 10px;
+        justify-content: flex-start;
+    }
+    
+    .btn-acao-secundaria {
+        width: 100%;
+        margin-top: 5px;
+    }
+}

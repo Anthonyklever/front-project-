@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Novo Agendamento</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+</head>
+<body class="agendamento-page">
+
+    <header class="topbar">
+        <a href="dash.html" class="btn-voltar">← Voltar</a>
+        <h2>Novo Agendamento</h2>
+        </header>
+
+    <main class="main-content">
+    
+    <div id="agendamento-success" class="alert-success" style="display: none;">
+        </div>
+    
+    <form class="agendamento-form" id="agendamento-form">
+        
+        <label for="titulo"><i class="fas fa-bookmark"></i> Motivo/Título</label>
+        <input type="text" id="titulo" placeholder="Ex: Reunião de Equipe Q4" required>
+
+        <label for="sala"><i class="fas fa-building"></i> Sala</label>
+        <select id="sala" required>
+            <option value="">Selecione a sala</option>
+            <option>Sala A1 (Reuniões - 30 Pessoas)</option>
+            <option>Sala B2 (Treinamentos - 50 Pessoas)</option>
+            <option>Auditório Central (Eventos)</option>
+        </select>
+
+        <label for="data"><i class="fas fa-calendar-alt"></i> Data</label>
+        <input type="date" id="data" required>
+
+        <div class="horario-group">
+            <div class="horario-input">
+                <label for="hora-inicio"><i class="fas fa-clock"></i> Início</label>
+                <input type="time" id="hora-inicio" required>
+            </div>
+            <div class="horario-input">
+                <label for="hora-fim">Fim</label>
+                <input type="time" id="hora-fim" required>
+            </div>
+        </div>
+
+        <button type="submit" class="btn-confirmar" id="btn-confirmar">Confirmar Agendamento</button>
+    </form>
+</main>
+
+  <script>
+    // 1. Seleciona o formulário e a caixa de mensagem
+    const agendamentoForm = document.getElementById('agendamento-form');
+    const successMessage = document.getElementById('agendamento-success');
+    
+    // 2. Adiciona o ouvinte para o evento de SUBMIT
+    agendamentoForm.addEventListener('submit', function(event) {
+        // Impede o envio padrão e o reload da página
+        event.preventDefault(); 
+
+        // 3. Captura os dados essenciais para a mensagem (Motivo e Sala)
+        const titulo = document.getElementById('titulo').value;
+        const sala = document.getElementById('sala').value;
+        
+        // 4. Configura e exibe a mensagem de sucesso
+        successMessage.innerHTML = `✅ **${titulo}** na **${sala}** agendada! Você pode ver em "Ver Meus Agendamentos".`;
+        
+        // 5. Esconde o formulário e mostra a mensagem
+        agendamentoForm.style.display = 'none';
+        successMessage.style.display = 'block';
+
+        // 6. Limpa os campos (simulando que o dado foi para o 'banco')
+        agendamentoForm.reset(); 
+        
+        // 7. (Opcional) Redireciona após 4 segundos para o Dashboard
+        
+    });
+  </script>
+
+</body>
+</html>
